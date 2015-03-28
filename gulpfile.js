@@ -5,8 +5,11 @@ var del = require('del');
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
+var uglify = require('gulp-uglify');
+var buffer = require('gulp-buffer');
 var browserify = require('browserify');
 var watchify = require('watchify');
+var cssmin = require('gulp-cssmin');
 var source = require('vinyl-source-stream'),
     
     sourceFile = './app/scripts/app.js',
@@ -25,6 +28,7 @@ gulp.task('styles', function () {
             precision: 10,
             loadPath: ['app/bower_components']}))
         .pipe($.autoprefixer('last 1 version'))
+        .pipe(cssmin())
         .pipe(gulp.dest('dist/styles'))
         .pipe($.size());
 });
@@ -46,6 +50,8 @@ gulp.task('scripts', function () {
             // log errors if they happen
             .on('error', $.util.log.bind($.util, 'Browserify Error'))
             .pipe(source(destFileName))
+            .pipe(buffer())
+            .pipe(uglify())
             .pipe(gulp.dest(destFolder));
     }
 
@@ -59,8 +65,6 @@ gulp.task('buildScripts', function() {
             .pipe(source(destFileName))
             .pipe(gulp.dest('dist/scripts'));
 });
-
-
 
 
 // HTML
