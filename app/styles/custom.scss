@@ -1,0 +1,58 @@
+$blue : #00AFCC;
+
+html, body{
+	min-width:100%;
+	min-height:100%;
+}
+
+.text-field{
+	width:100%;
+}
+
+.mui-radio-button {
+	padding-top:30px;
+	width: 50%;
+	float:left;
+}
+
+.navbar {
+	background: lighten($blue,2%);
+	color:white;
+	.mui-font-style-display-1{
+		font-size: 24px;
+		margin-bottom: 10px;
+		letter-spacing: 0;
+		font-weight: 400;
+		color: rgba(255, 255, 255, 0.87);
+		padding-top: 0;
+		line-height: 64px;
+		float: left;
+	}
+}
+
+.component-content{
+	margin-top:74px;
+}
+
+.list-header {
+	padding-top:18px;
+	color:#333;
+}
+
+.list-item{
+	font-size:15px;
+	div {
+		padding:8px 30px;
+
+	}
+}
+
+.addButton {
+	position: fixed;
+	bottom: 10%;
+	right:10%;
+}
+
+.logo-image {
+	height: 50px;
+}
