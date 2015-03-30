@@ -15,6 +15,14 @@ html, body{
 	float:left;
 }
 
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
 .navbar {
 	background: lighten($blue,2%);
 	color:white;
@@ -29,6 +37,11 @@ html, body{
 		float: left;
 	}
 }
+
+.header-phone {
+	color:#888;
+}
+
 
 .component-content{
 	margin-top:74px;

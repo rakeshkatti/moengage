@@ -24,14 +24,15 @@ var AddItem = React.createClass({
 		this.firebaseRef = new Firebase("https://glowing-heat-6519.firebaseio.com/items/");
 	},
 	handleSubmit: function() {
-		if(this.state.fullname == ""){
-			this.setState({"fullname_error_text":"Name cannot be empty"});
+		if(this.state.email_error_text != ""){
 			return;
 		}
-		if(this.state.email == ""){
-			this.setState({"email_error_text":"Email cannot be empty"});
+		if(this.state.phone_error_text != ""){
 			return;
 		} 
+        if(this.state.fullname_error_text != ""){
+            return;
+        }
 		this.firebaseRef.push({
 			fullname: this.state.fullname,
 			gender: this.state.gender,
@@ -170,7 +171,9 @@ var AddItem = React.createClass({
  		}
  		if(field == "fullname"){
  			this.setState({"fullname":value});
- 			if(this.state.fullname != ""){
+            if(this.state.fullname.length > 50){
+                this.setState({"fullname_error_text":"Full name cannot be more than 50 characters"});
+            }else if(this.state.fullname != ""){
  				this.setState({"fullname_error_text":""});
  			}
  		}
