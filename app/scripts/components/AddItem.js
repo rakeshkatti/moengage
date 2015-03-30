@@ -17,6 +17,7 @@ var AddItem = React.createClass({
 	    	designation:"",
 	    	email_error_text:"",
 	    	fullname_error_text:"",
+            designation_error_text:"",
 	    	phone_error_text:""
 		};
 	 },
@@ -24,15 +25,13 @@ var AddItem = React.createClass({
 		this.firebaseRef = new Firebase("https://glowing-heat-6519.firebaseio.com/items/");
 	},
 	handleSubmit: function() {
-		if(this.state.email_error_text != ""){
+		if(this.state.email_error_text != "" 
+            || this.state.phone_error_text != ""
+            || this.state.fullname_error_text!= ""
+            || this.state.designation_error_text != ""){
 			return;
 		}
-		if(this.state.phone_error_text != ""){
-			return;
-		} 
-        if(this.state.fullname_error_text != ""){
-            return;
-        }
+
 		this.firebaseRef.push({
 			fullname: this.state.fullname,
 			gender: this.state.gender,
@@ -51,6 +50,7 @@ var AddItem = React.createClass({
 		this.setState({"email_error_text":""});
 		this.setState({"phone_error_text":""});
 		this.setState({"fullname_error_text":""});
+        this.setState({"designation_error_text":""});
 	},
   	render: function() {
   	var {DropDownMenu, FloatingActionButton, RaisedButton, RadioButtonGroup, RadioButton, TextField, DatePicker} = mui;
@@ -119,6 +119,7 @@ var AddItem = React.createClass({
     				<TextField className="text-field" id={"designation"} 
     					onChange={this.validate}
     					value={this.state.designation}
+                        errorText={this.state.designation_error_text}
     					hintText="Please enter your designation"
     					floatingLabelText="Designation"  />
     			</div>
@@ -173,7 +174,7 @@ var AddItem = React.createClass({
  			this.setState({"fullname":value});
             if(this.state.fullname.length > 50){
                 this.setState({"fullname_error_text":"Full name cannot be more than 50 characters"});
-            }else if(this.state.fullname != ""){
+            } else if(this.state.fullname != ""){
  				this.setState({"fullname_error_text":""});
  			}
  		}
@@ -181,7 +182,12 @@ var AddItem = React.createClass({
  			this.setState({"gender":value});
  		}
  		if(field == "designation"){
- 			this.setState({"designation":value});
+            this.setState({"designation":value});
+            if(this.state.fullname.length > 100){
+                this.setState({"designation_error_text":"Designation cannot be more than 100 characters"});
+            } else {
+                this.setState({"designation_error_text":""});
+            }
  		}
  	}
 });
