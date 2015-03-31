@@ -25,6 +25,21 @@ var AddItem = React.createClass({
 		this.firebaseRef = new Firebase("https://glowing-heat-6519.firebaseio.com/items/");
 	},
 	handleSubmit: function() {
+        if(this.state.fullname == ""){
+            this.setState({"fullname_error_text":"Full name cannot be empty"});
+            return;
+        }
+
+        if(this.state.email == ""){
+            this.setState({"email_error_text":"Email cannot be empty"});
+            return;
+        }
+
+        if(this.state.phone == ""){
+            this.setState({"phone_error_text":"Mobile number cannot be empty"});
+            return;
+        }
+
 		if(this.state.email_error_text != "" 
             || this.state.phone_error_text != ""
             || this.state.fullname_error_text!= ""

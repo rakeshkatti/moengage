@@ -3,6 +3,7 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "./node_modules/material-ui-sass/material-ui";
 @import "custom.scss";
+@import "loading_indicator.scss";
 
 .browsehappy {
     margin: 0.2em 0;

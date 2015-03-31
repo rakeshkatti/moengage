@@ -9,7 +9,7 @@ var mui = require('material-ui');
 var ListItems = React.createClass({
 	mixins: [ReactFireMixin],
 	getInitialState: function() {
-		return {items: [],displayClass: "show"};
+		return {items: []};
 	},
 	componentWillMount: function() {
 		this.firebaseRef = new Firebase("https://glowing-heat-6519.firebaseio.com/items/");
@@ -18,6 +18,9 @@ var ListItems = React.createClass({
 		this.state.items.map(function(item){
 			this.searchNames.push(item.fullname);
 		});
+	},
+	componentDidUpdate: function(nextProps){
+		document.getElementById("loading_indicator").classList.add("hide");
 	},
 	sortBy: function(name){
 		var items = this.state.items.sort(function (a, b) {
@@ -53,7 +56,14 @@ var ListItems = React.createClass({
 			  </div>
 			  
 			</Toolbar>
-			<div id = "loading_indicator" className = {this.state.displayClass}>Loading..</div>
+			<div id = "loading_indicator">
+				<div className='uil-cube-css'>
+				  <div></div>
+				  <div></div>
+				  <div></div>
+				  <div></div>
+				</div>
+			</div>
     		{this.state.items.reverse().map(listItem)}
     		<div className="addButton">
     			<Link to="addItem">
